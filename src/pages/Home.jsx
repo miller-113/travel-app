@@ -5,7 +5,7 @@ import TripCard from "../components/TripCard";
 import TripFilter from "../components/TripFilter";
 
 const Home = () => {
-  const [trips, setTrips] = useState(tripsData);
+  const [trips, setTrips] = useState();
 
   useEffect(() => {
     setTrips(tripsData);
