@@ -1,5 +1,6 @@
 const TripFilter = () => {
   // TODO add action onChange for each section(input)
+  // TODO add reset filter action
   const optionsFilterDuration = ["duration", "&lt; 5 days", "&lt; 10 days", "&ge; 10 days"].map((option, ind) => (
     <option value={ind === 0 ? "" : option} key={ind}>
       {option}
