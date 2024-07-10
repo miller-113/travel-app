@@ -1,4 +1,4 @@
-export interface Trip {
+export interface BookingTrip {
   title: string;
   duration: number;
   price: number;
@@ -10,7 +10,18 @@ export interface Booking {
   tripId: string;
   guests: number;
   date: string;
-  trip: Trip;
+  trip: BookingTrip;
   totalPrice: number;
+  createdAt: string;
+}
+
+export interface Trip {
+  id: string;
+  title: string;
+  description: string;
+  level: string;
+  duration: number;
+  price: number;
+  image: string;
   createdAt: string;
 }

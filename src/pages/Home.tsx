@@ -3,8 +3,10 @@ import tripsData from "../data/trips.json";
 import TripCard from "../components/TripCard";
 import TripFilter from "../components/TripFilter";
 
+import { Trip } from "../types";
+
 const Home = () => {
-  const [trips, setTrips] = useState([]);
+  const [trips, setTrips] = useState<Trip[]>([]);
   const [filters, setFilters] = useState({
     search: "",
     duration: "",
@@ -15,7 +17,7 @@ const Home = () => {
     setTrips(tripsData);
   }, []);
 
-  const handleFilterChange = (name, value) => {
+  const handleFilterChange = (name: string, value: string) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [name]: value,

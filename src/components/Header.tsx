@@ -13,7 +13,6 @@ const Header = () => {
               <Link
                 to={"/bookings"}
                 data-test-id="header-bookings-link"
-                href="./bookings.html"
                 className="nav-header__inner"
               >
                 <span className="visually-hidden">Bookings</span>
@@ -24,7 +23,7 @@ const Header = () => {
               <div
                 data-test-id="header-profile-nav"
                 className="nav-header__inner profile-nav"
-                tabIndex="0"
+                tabIndex={0}
               >
                 <span className="visually-hidden">Profile</span>
                 <img src="./assets/images/user.svg" alt="profile" />

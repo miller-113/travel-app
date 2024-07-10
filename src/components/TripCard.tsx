@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
 
-const TripCard = ({ tripDetails }) => {
+import { Trip } from "../types";
+import { FC } from "react";
+
+interface TripCardProps {
+  tripDetails: Trip;
+}
+
+const TripCard: FC<TripCardProps> = ({ tripDetails }) => {
   const { id, title, level, duration, price, image } = tripDetails;
   return (
     <li data-test-id="trip-card" className="trip-card">
@@ -26,7 +33,7 @@ const TripCard = ({ tripDetails }) => {
           </strong>
         </div>
       </div>
-      <Link to={`trip/${id}`} data-test-id="trip-card-link" href="./trip.html" className="button">
+      <Link to={`trip/${id}`} data-test-id="trip-card-link" className="button">
         Discover a trip
       </Link>
     </li>

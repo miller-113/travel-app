@@ -1,11 +1,18 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { FC } from "react";
+import { Trip } from "../types";
 
-const TripModal = ({ trip, onClose }) => {
+interface TripModalProps {
+  trip: Trip;
+  onClose: () => void;
+}
+
+const TripModal: FC<TripModalProps> = ({ trip, onClose }) => {
   const [date, setDate] = useState("");
-  const [guests, setGuests] = useState(1);
+  const [guests, setGuests] = useState('1');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const booking = {
       id: uuidv4(),
@@ -17,10 +24,10 @@ const TripModal = ({ trip, onClose }) => {
       guests,
       title: trip.title,
       date,
-      totalPrice: trip.price * guests,
+      totalPrice: trip.price * Number(guests),
     };
 
-    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+    const bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
     bookings.push(booking);
     localStorage.setItem("bookings", JSON.stringify(bookings));
     onClose();
@@ -80,7 +87,7 @@ const TripModal = ({ trip, onClose }) => {
               data-test-id="book-trip-popup-total-value"
               className="book-trip-popup__total-value"
             >
-              ${trip.price * guests}
+              ${trip.price * Number(guests)}
             </output>
           </span>
           <button data-test-id="book-trip-popup-submit" className="button" type="submit">
