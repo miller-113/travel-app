@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import bookingsData from "../data/bookings.json";
 import BookingCard from "../components/BookingCard";
 
+import { Booking } from "../types";
+
 const Bookings = () => {
-  const [bookings, setBookings] = useState([]);
-  const cancelBooking = (bookingId) => setBookings(prevState => {
+  const [bookings, setBookings] = useState<Booking[]>([]);
+  const cancelBooking = (bookingId: string) => setBookings(prevState => {
     const filteredBookings = prevState.filter(booking => booking.id !== bookingId)
     localStorage.setItem("bookings", JSON.stringify(filteredBookings));
     return filteredBookings
