@@ -4,9 +4,11 @@ import BookingCard from "../components/BookingCard";
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
-  const cancelBooking = (bookingId) => setBookings(prevState => (
-    prevState.filter(booking => booking.id !== bookingId)
-  ))
+  const cancelBooking = (bookingId) => setBookings(prevState => {
+    const filteredBookings = prevState.filter(booking => booking.id !== bookingId)
+    localStorage.setItem("bookings", JSON.stringify(filteredBookings));
+    return filteredBookings
+})
   useEffect(() => {
     setBookings(bookingsData);
   }, []);
@@ -15,8 +17,8 @@ const Bookings = () => {
     <main className="bookings-page">
       <h1 className="visually-hidden">Travel App</h1>
       <ul className="bookings__list">
-        {bookings.map((booking) => (
-          <BookingCard key={booking.id} bookingDeatails={bookings} onCancel={cancelBooking} />
+        {bookings && bookings.map((booking) => (
+          <BookingCard key={booking.id} bookingDeatails={booking} onCancel={cancelBooking} />
         ))}
       </ul>
     </main>
