@@ -1,4 +1,3 @@
-// src/pages/Home.jsx
 import { useState, useEffect } from "react";
 import tripsData from "../data/trips.json";
 import TripCard from "../components/TripCard";
@@ -10,7 +9,7 @@ const Home = () => {
   useEffect(() => {
     setTrips(tripsData);
   }, []);
-
+  
   return (
     <>
       <TripFilter />
@@ -18,8 +17,8 @@ const Home = () => {
       <section className="trips">
         <h2 className="visually-hidden">Trips List</h2>
         <ul className="trip-list">
-          {trips.map(trip => (
-            <TripCard key={trip.id} tripDetails={trip}/>
+          {trips && trips.map((trip) => (
+            <TripCard key={trip.id} tripDetails={trip} />
           ))}
         </ul>
       </section>
