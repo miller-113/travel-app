@@ -1,4 +1,12 @@
-const BookingCard = ({ bookingDetails, onCancel }) => {
+import { FC } from "react";
+import { Booking } from "../types";
+
+interface BookingCardProps {
+  bookingDetails: Booking;
+  onCancel: (id: string) => void;
+}
+
+const BookingCard: FC<BookingCardProps> = ({ bookingDetails, onCancel }) => {
   const { id, trip, guests, date, totalPrice } = bookingDetails;
   return (
     <li data-test-id="booking" className="booking">

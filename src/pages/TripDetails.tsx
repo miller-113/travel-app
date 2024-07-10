@@ -2,10 +2,20 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import tripsData from "../data/trips.json";
 import TripModal from "../components/TripModal";
+import { Trip } from "../types";
 
 const TripDetails = () => {
   const { tripId } = useParams();
-  const trip = tripsData.find((t) => t.id === tripId);
+  const trip: Trip | undefined = tripsData.find((t) => t.id === tripId);
+
+  if (!trip) {
+    return (
+      <main className="trip-page">
+        <h1 className="visually-hidden">Travel App</h1>
+        <p>Trip not found</p>
+      </main>
+    );
+  }
   const { title, level, duration, price, image, description } = trip;
 
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const SignIn = () => {
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
 
@@ -30,12 +30,7 @@ const SignIn = () => {
       </form>
       <span>
         Don&apos;t have an account?
-        <Link
-          to="/sign-up"
-          data-test-id="auth-sign-up-link"
-          href="./sign-up.html"
-          className="sign-in-form__link"
-        >
+        <Link to="/sign-up" data-test-id="auth-sign-up-link" className="sign-in-form__link">
           Sign Up
         </Link>
       </span>

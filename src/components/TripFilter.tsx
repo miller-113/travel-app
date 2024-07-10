@@ -1,4 +1,19 @@
-const TripFilter = ({ filters, onFilterChange, onResetFilters }) => {
+import { FC } from "react";
+
+interface Filters {
+  search: string;
+  duration: string;
+  level: string;
+}
+
+interface TripFilterProps {
+  filters: Filters;
+  onFilterChange: (name: string, value: string) => void;
+  onResetFilters: () => void;
+}
+
+const TripFilter: FC<TripFilterProps> = ({ filters, onFilterChange, onResetFilters }) => {
+  
   const optionsFilterDuration = ["duration", "< 5 days", "< 10 days", "≥ 10 days"].map(
     (option, ind) => (
       <option value={ind === 0 ? "" : option} key={ind}>
@@ -11,8 +26,10 @@ const TripFilter = ({ filters, onFilterChange, onResetFilters }) => {
       {option}
     </option>
   ));
-  
-  const handleFilter = ({ target }) => onFilterChange(target.getAttribute("name"), target.value);
+  const handleFilter = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = event.target;
+    onFilterChange(name, value);
+  };
 
   return (
     <section className="trips-filter">
