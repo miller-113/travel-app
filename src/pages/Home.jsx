@@ -9,17 +9,14 @@ const Home = () => {
   useEffect(() => {
     setTrips(tripsData);
   }, []);
-  
+
   return (
     <>
       <TripFilter />
-
       <section className="trips">
         <h2 className="visually-hidden">Trips List</h2>
         <ul className="trip-list">
-          {trips && trips.map((trip) => (
-            <TripCard key={trip.id} tripDetails={trip} />
-          ))}
+          {trips && trips.map((trip) => <TripCard key={trip.id} tripDetails={trip} />)}
         </ul>
       </section>
     </>

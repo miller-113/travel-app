@@ -6,7 +6,7 @@ const SignIn = () => {
   };
 
   return (
-    <>
+    <main className="sign-in-page">
       <h1 className="visually-hidden">Travel App</h1>
       <form onSubmit={handleSubmit} className="sign-in-form" autoComplete="off">
         <h2 className="sign-in-form__title">Sign In</h2>
@@ -39,7 +39,7 @@ const SignIn = () => {
           Sign Up
         </Link>
       </span>
-    </>
+    </main>
   );
 };
 

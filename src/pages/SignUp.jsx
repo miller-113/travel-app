@@ -3,11 +3,10 @@ import { Link } from "react-router-dom";
 const SignUp = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
-
   };
 
   return (
-    <>
+    <main className="sign-up-page">
       <h1 className="visually-hidden">Travel App</h1>
       <form onSubmit={handleSubmit} className="sign-up-form" autoComplete="off">
         <h2 className="sign-up-form__title">Sign Up</h2>
@@ -35,15 +34,11 @@ const SignUp = () => {
       </form>
       <span>
         Already have an account?
-        <Link
-          to="/sign-in"
-          data-test-id="auth-sign-in-link"
-          className="sign-up-form__link"
-        >
+        <Link to="/sign-in" data-test-id="auth-sign-in-link" className="sign-up-form__link">
           Sign In
         </Link>
       </span>
-    </>
+    </main>
   );
 };
 
