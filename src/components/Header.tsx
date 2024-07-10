@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+const BASE_URL = import.meta.env.BASE_URL || "";
+
 const Header = () => {
   return (
     <header className="header">
@@ -16,7 +18,7 @@ const Header = () => {
                 className="nav-header__inner"
               >
                 <span className="visually-hidden">Bookings</span>
-                <img src="/assets/images/briefcase.svg" alt="bookings" />
+                <img src={`${BASE_URL}assets/images/briefcase.svg`} alt="bookings" />
               </Link>
             </li>
             <li className="nav-header__item" title="Profile">
@@ -26,7 +28,7 @@ const Header = () => {
                 tabIndex={0}
               >
                 <span className="visually-hidden">Profile</span>
-                <img src="/assets/images/user.svg" alt="profile" />
+                <img src={`${BASE_URL}assets/images/user.svg`} alt="profile" />
                 <ul data-test-id="header-profile-nav-list" className="profile-nav__list">
                   <li data-test-id="header-profile-nav-username" className="profile-nav__item">
                     John Doe
