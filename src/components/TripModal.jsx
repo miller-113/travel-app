@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const TripModal = ({ trip, onClose }) => {
   const [date, setDate] = useState("");
@@ -7,10 +8,16 @@ const TripModal = ({ trip, onClose }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const booking = {
-      tripTitle: trip.title,
-      date,
+      id: uuidv4(),
+      trip: {
+        title: trip.title,
+        duration: trip.duration,
+        price: trip.price,
+      },
       guests,
-      price: trip.price * guests,
+      title: trip.title,
+      date,
+      totalPrice: trip.price * guests,
     };
 
     const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
