@@ -9,7 +9,7 @@ const BookingCard = ({ bookingDetails, onCancel }) => {
         {guests} guests
       </span>
       <span data-test-id="booking-date" className="booking__date">
-        {date}
+        {new Date(date).toLocaleDateString("en-CA")}
       </span>
       <span data-test-id="booking-total" className="booking__total">
         ${totalPrice}
