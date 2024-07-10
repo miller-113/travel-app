@@ -16,7 +16,7 @@ const Header = () => {
                 className="nav-header__inner"
               >
                 <span className="visually-hidden">Bookings</span>
-                <img src="./travel-app/public/assets/images/briefcase.svg" alt="bookings" />
+                <img src="/assets/images/briefcase.svg" alt="bookings" />
               </Link>
             </li>
             <li className="nav-header__item" title="Profile">
@@ -26,7 +26,7 @@ const Header = () => {
                 tabIndex={0}
               >
                 <span className="visually-hidden">Profile</span>
-                <img src="./travel-app/public/assets/images/user.svg" alt="profile" />
+                <img src="/assets/images/user.svg" alt="profile" />
                 <ul data-test-id="header-profile-nav-list" className="profile-nav__list">
                   <li data-test-id="header-profile-nav-username" className="profile-nav__item">
                     John Doe
