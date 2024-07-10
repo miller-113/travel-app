@@ -35,7 +35,11 @@ const SignUp = () => {
       </form>
       <span>
         Already have an account?
-        <Link data-test-id="auth-sign-in-link" href="./sign-in.html" className="sign-up-form__link">
+        <Link
+          to="/sign-in"
+          data-test-id="auth-sign-in-link"
+          className="sign-up-form__link"
+        >
           Sign In
         </Link>
       </span>
