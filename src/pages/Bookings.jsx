@@ -10,7 +10,13 @@ const Bookings = () => {
     return filteredBookings
 })
   useEffect(() => {
-    setBookings(bookingsData);
+    const bookingsFromStorage = localStorage.getItem('bookings');
+    if (bookingsFromStorage){
+      setBookings(JSON.parse(bookingsFromStorage))
+    }else{
+      setBookings(bookingsData);
+    }
+    
   }, []);
 
   return (
@@ -18,7 +24,7 @@ const Bookings = () => {
       <h1 className="visually-hidden">Travel App</h1>
       <ul className="bookings__list">
         {bookings && bookings.map((booking) => (
-          <BookingCard key={booking.id} bookingDeatails={booking} onCancel={cancelBooking} />
+          <BookingCard key={booking.id} bookingDetails={booking} onCancel={cancelBooking} />
         ))}
       </ul>
     </main>
