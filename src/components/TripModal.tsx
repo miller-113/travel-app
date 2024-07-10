@@ -10,7 +10,7 @@ interface TripModalProps {
 
 const TripModal: FC<TripModalProps> = ({ trip, onClose }) => {
   const [date, setDate] = useState("");
-  const [guests, setGuests] = useState('1');
+  const [guests, setGuests] = useState("1");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();

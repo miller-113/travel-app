@@ -13,6 +13,7 @@ interface TripFilterProps {
 }
 
 const TripFilter: FC<TripFilterProps> = ({ filters, onFilterChange, onResetFilters }) => {
+  
   const optionsFilterDuration = ["duration", "< 5 days", "< 10 days", "≥ 10 days"].map(
     (option, ind) => (
       <option value={ind === 0 ? "" : option} key={ind}>
@@ -25,13 +26,11 @@ const TripFilter: FC<TripFilterProps> = ({ filters, onFilterChange, onResetFilte
       {option}
     </option>
   ));
-  
-
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     onFilterChange(name, value);
   };
-  
+
   return (
     <section className="trips-filter">
       <h2 className="visually-hidden">Trips filter</h2>

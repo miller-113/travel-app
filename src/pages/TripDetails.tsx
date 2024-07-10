@@ -7,8 +7,8 @@ import { Trip } from "../types";
 const TripDetails = () => {
   const { tripId } = useParams();
   const trip: Trip | undefined = tripsData.find((t) => t.id === tripId);
-  
-  if (!trip){
+
+  if (!trip) {
     return (
       <main className="trip-page">
         <h1 className="visually-hidden">Travel App</h1>

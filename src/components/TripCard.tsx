@@ -39,4 +39,4 @@ const TripCard: FC<TripCardProps> = ({ tripDetails }) => {
     </li>
   );
 };
-export default TripCard
+export default TripCard;
