@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
+
 const TripCard = ({ tripDetails }) => {
-  const { title, level, duration, price, image } = tripDetails;
+  const { id, title, level, duration, price, image } = tripDetails;
   return (
     <li data-test-id="trip-card" className="trip-card">
       <img data-test-id="trip-card-image" src={image} alt="trip photo" />
@@ -24,9 +26,9 @@ const TripCard = ({ tripDetails }) => {
           </strong>
         </div>
       </div>
-      <a data-test-id="trip-card-link" href="./trip.html" className="button">
+      <Link to={`trip/${id}`} data-test-id="trip-card-link" href="./trip.html" className="button">
         Discover a trip
-      </a>
+      </Link>
     </li>
   );
 };
