@@ -29,7 +29,7 @@ const SignUp = () => {
       <h1 className="visually-hidden">Travel App</h1>
       <form onSubmit={handleSubmit} className="sign-up-form" autoComplete="off">
         <h2 className="sign-up-form__title">Sign Up</h2>
-        {loading && <div>Loading...</div>}
+        {loading && <div data-test-id="loader">Loading...</div>}
         {error && <div className="error">{error}</div>}
         <label className="input">
           <span className="input__heading">Full name</span>

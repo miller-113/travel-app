@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import TripCard from "../components/TripCard";
 import TripFilter from "../components/TripFilter";
 import { fetchTrips } from "../features/trips/tripsThunks";
-import { Trip } from "../types";
+
+import { RootState } from "../app/store";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const trips = useSelector((state) => state.trips.trips);
-  const loading = useSelector((state) => state.trips.loading);
-  const error = useSelector((state) => state.trips.error);
+  const trips = useSelector((state: RootState) => state.trips.trips);
+  const loading = useSelector((state: RootState) => state.trips.loading);
+  const error = useSelector((state: RootState) => state.trips.error);
 
   const [filters, setFilters] = useState({
     search: "",
@@ -18,10 +19,10 @@ const Home = () => {
   });
 
   useEffect(() => {
-    dispatch(fetchTrips());
+    dispatch(fetchTrips() as any);
   }, [dispatch]);
 
-  const handleFilterChange = (name, value) => {
+  const handleFilterChange = (name: string, value: string) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [name]: value,

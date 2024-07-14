@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
+import { User } from "../types";
+import { FC } from "react";
 
 const BASE_URL = import.meta.env.BASE_URL || "";
 
-const Header = ({ user, onSignOut }) => {
+interface HeaderProps {
+  user: User | null;
+  onSignOut: () => void;
+}
+
+const Header: FC<HeaderProps> = ({ user, onSignOut }) => {
   return (
     <header className="header">
       <div className="header__inner">

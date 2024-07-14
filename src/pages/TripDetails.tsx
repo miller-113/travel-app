@@ -1,24 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
-import tripsData from "../data/trips.json";
 import TripModal from "../components/TripModal";
-
 import { fetchTripById } from "../features/trips/tripsThunks";
 
-import { Trip } from "../types";
+import { RootState } from "../app/store";
 
 const TripDetails = () => {
   const { tripId } = useParams();
   const dispatch = useDispatch();
-  const trip = useSelector((state) => state.trips.trip);
-  const loading = useSelector((state) => state.trips.loading);
-  const error = useSelector((state) => state.trips.error);
+  const trip = useSelector((state: RootState) => state.trips.trip);
+  const loading = useSelector((state: RootState) => state.trips.loading);
+  const error = useSelector((state: RootState) => state.trips.error);
 
   useEffect(() => {
     if (tripId) {
-      dispatch(fetchTripById(tripId));
+      dispatch(fetchTripById(tripId) as any);
     }
   }, [dispatch, tripId]);
 

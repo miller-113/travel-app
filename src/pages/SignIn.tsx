@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { signIn } from "../features/auth/authThunks";
@@ -19,7 +19,7 @@ const SignIn = () => {
       .then(() => {
         navigate("/");
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.error("Failed to sign in:", err);
       });
   };

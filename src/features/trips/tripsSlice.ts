@@ -1,7 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchTrips, fetchTripById, bookTrip } from "./tripsThunks";
+import { fetchTrips, fetchTripById } from "./tripsThunks";
 
-const initialState = {
+import { Trip } from "../../types";
+
+interface TripState {
+  trips: Trip[];
+  trip: Trip | null;
+  loading: boolean;
+  error: string | null;
+}
+
+const initialState: TripState = {
   trips: [],
   trip: null,
   loading: false,
@@ -24,7 +33,7 @@ const tripsSlice = createSlice({
       })
       .addCase(fetchTrips.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload as string;
       })
       .addCase(fetchTripById.pending, (state) => {
         state.loading = true;
@@ -36,7 +45,7 @@ const tripsSlice = createSlice({
       })
       .addCase(fetchTripById.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload as string;
       });
   },
 });

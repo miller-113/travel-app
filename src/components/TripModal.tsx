@@ -20,7 +20,7 @@ const TripModal: FC<TripModalProps> = ({ trip, onClose }) => {
       guests,
       date,
     };
-    dispatch(bookTrip(bookingData));
+    dispatch(bookTrip(bookingData) as any);
     onClose();
   };
 

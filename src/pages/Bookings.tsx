@@ -11,15 +11,16 @@ const Bookings = () => {
   const error = useSelector((state: RootState) => state.bookings.error);
 
   useEffect(() => {
-    dispatch(fetchBookings());
+    dispatch(fetchBookings() as any);
   }, [dispatch]);
 
   const handleCancelBooking = (bookingId: string) => {
-    dispatch(cancelBooking(bookingId));
+    dispatch(cancelBooking(bookingId) as any);
   };
+  
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div data-test-id="loader">Loading...</div>;
   }
 
   if (error) {

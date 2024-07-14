@@ -12,15 +12,16 @@ import SignIn from "./pages/SignIn";
 import Home from "./pages/Home";
 import TripDetails from "./pages/TripDetails";
 import Bookings from "./pages/Bookings";
+import { RootState } from "./app/store";
 
 function App() {
   const dispatch = useDispatch();
-  const { user, loading } = useSelector((state) => state.auth);
+  const { user, loading } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      dispatch(fetchAuthenticatedUser());
+      dispatch(fetchAuthenticatedUser() as any);
     }
   }, [dispatch]);
 
@@ -30,7 +31,7 @@ function App() {
 
   return (
     <BrowserRouter basename="/travel-app">
-      <Header user={user} onSignOut={() => dispatch(signOut())} />
+      <Header user={user} onSignOut={() => dispatch(signOut() as any)} />
       <Routes>
         <Route path="/sign-up" element={user ? <Navigate to="/" /> : <SignUp />} />
         <Route path="/sign-in" element={user ? <Navigate to="/" /> : <SignIn />} />

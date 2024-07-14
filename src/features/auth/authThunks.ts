@@ -6,7 +6,7 @@ export const signIn = createAsyncThunk("auth/signIn", async (credentials, { reje
     const response = await api.post("/auth/sign-in", credentials);
     localStorage.setItem("token", response.data.token);
     return response.data.user;
-  } catch (error) {
+  } catch (error: any) {
     return rejectWithValue(error.response.data.message);
   }
 });
@@ -16,7 +16,7 @@ export const signUp = createAsyncThunk("auth/signUp", async (credentials, { reje
     const response = await api.post("/auth/sign-up", credentials);
     localStorage.setItem("token", response.data.token);
     return response.data.user;
-  } catch (error) {
+  } catch (error: any) {
     return rejectWithValue(error.response.data.message);
   }
 });
@@ -27,7 +27,7 @@ export const fetchAuthenticatedUser = createAsyncThunk(
     try {
       const response = await api.get("/auth/authenticated-user");
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       if (error.response?.status === 401) {
         error.response.data.message = "Unauthorized";
       }
