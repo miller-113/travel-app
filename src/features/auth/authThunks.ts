@@ -28,7 +28,10 @@ export const fetchAuthenticatedUser = createAsyncThunk(
       const response = await api.get("/auth/authenticated-user");
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data.message);
+      if (error.response?.status === 401) {
+        error.response.data.message = "Unauthorized";
+      }
+      return rejectWithValue(error.response ? error.response.data.message : error.message);
     }
   }
 );
