@@ -6,7 +6,7 @@ export const fetchTrips = createAsyncThunk("trips/fetchTrips", async (_, { rejec
     const response = await api.get("/trips");
     return response.data;
   } catch (error) {
-    return rejectWithValue(error.response.data.message);
+    return rejectWithValue(error.response?.data?.message || "Unknown error");
   }
 });
 
@@ -17,7 +17,7 @@ export const fetchTripById = createAsyncThunk(
       const response = await api.get(`/trips/${tripId}`);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data.message);
+      return rejectWithValue(error.response?.data?.message || "Unknown error");
     }
   }
 );

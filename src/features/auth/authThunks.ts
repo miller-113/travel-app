@@ -38,4 +38,5 @@ export const fetchAuthenticatedUser = createAsyncThunk(
 
 export const signOut = createAsyncThunk("auth/signOut", async () => {
   localStorage.removeItem("token");
+  localStorage.setItem('s', '[1,2,3]')
 });

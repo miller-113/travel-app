@@ -8,7 +8,7 @@ export const fetchBookings = createAsyncThunk(
       const response = await api.get("/bookings");
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data.message);
+      return rejectWithValue({ message: error.response?.data?.message || "Unknown error" });
     }
   }
 );
@@ -20,7 +20,7 @@ export const cancelBooking = createAsyncThunk(
       await api.delete(`/bookings/${bookingId}`);
       return bookingId;
     } catch (error) {
-      return rejectWithValue(error.response.data.message);
+      return rejectWithValue({ message: error.response?.data?.message || "Unknown error" });
     }
   }
 );
@@ -32,7 +32,7 @@ export const bookTrip = createAsyncThunk(
       const response = await api.post("/bookings", { tripId, guests, date });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data.message);
+      return rejectWithValue({ message: error.response?.data?.message || "Unknown error" });
     }
   }
 );
