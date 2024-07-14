@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { FC } from "react";
+import React, { FC, useState } from "react";
+import { useDispatch } from "react-redux";
+import { bookTrip } from "../features/bookings/bookingsThunks";
 import { Trip } from "../types";
 
 interface TripModalProps {
@@ -9,27 +9,18 @@ interface TripModalProps {
 }
 
 const TripModal: FC<TripModalProps> = ({ trip, onClose }) => {
+  const dispatch = useDispatch();
   const [date, setDate] = useState("");
-  const [guests, setGuests] = useState("1");
+  const [guests, setGuests] = useState(1);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    const booking = {
-      id: uuidv4(),
-      trip: {
-        title: trip.title,
-        duration: trip.duration,
-        price: trip.price,
-      },
+    const bookingData = {
+      tripId: trip.id,
       guests,
-      title: trip.title,
       date,
-      totalPrice: trip.price * Number(guests),
     };
-
-    const bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
-    bookings.push(booking);
-    localStorage.setItem("bookings", JSON.stringify(bookings));
+    dispatch(bookTrip(bookingData) as any);
     onClose();
   };
 
@@ -77,7 +68,7 @@ const TripModal: FC<TripModalProps> = ({ trip, onClose }) => {
               min="1"
               max="10"
               value={guests}
-              onChange={(e) => setGuests(e.target.value)}
+              onChange={(e) => setGuests(Number(e.target.value))}
               required
             />
           </label>
@@ -87,7 +78,7 @@ const TripModal: FC<TripModalProps> = ({ trip, onClose }) => {
               data-test-id="book-trip-popup-total-value"
               className="book-trip-popup__total-value"
             >
-              ${trip.price * Number(guests)}
+              ${trip.price * guests}
             </output>
           </span>
           <button data-test-id="book-trip-popup-submit" className="button" type="submit">

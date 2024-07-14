@@ -1,8 +1,27 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+
+import { signIn } from "../features/auth/authThunks";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    dispatch(signIn({ email, password }))
+      .unwrap()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err: any) => {
+        console.error("Failed to sign in:", err);
+      });
   };
 
   return (
@@ -12,11 +31,20 @@ const SignIn = () => {
         <h2 className="sign-in-form__title">Sign In</h2>
         <label className="input">
           <span className="input__heading">Email</span>
-          <input data-test-id="auth-email" name="email" type="email" required />
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            data-test-id="auth-email"
+            name="email"
+            type="email"
+            required
+          />
         </label>
         <label className="input">
           <span className="input__heading">Password</span>
           <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             data-test-id="auth-password"
             name="password"
             type="password"

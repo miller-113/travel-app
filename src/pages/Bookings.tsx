@@ -1,25 +1,31 @@
-import { useState, useEffect } from "react";
-import bookingsData from "../data/bookings.json";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBookings, cancelBooking } from "../features/bookings/bookingsThunks";
 import BookingCard from "../components/BookingCard";
-
-import { Booking } from "../types";
+import { RootState } from "../app/store";
 
 const Bookings = () => {
-  const [bookings, setBookings] = useState<Booking[]>([]);
-  const cancelBooking = (bookingId: string) =>
-    setBookings((prevState) => {
-      const filteredBookings = prevState.filter((booking) => booking.id !== bookingId);
-      localStorage.setItem("bookings", JSON.stringify(filteredBookings));
-      return filteredBookings;
-    });
+  const dispatch = useDispatch();
+  const bookings = useSelector((state: RootState) => state.bookings.bookings);
+  const loading = useSelector((state: RootState) => state.bookings.loading);
+  const error = useSelector((state: RootState) => state.bookings.error);
+
   useEffect(() => {
-    const bookingsFromStorage = localStorage.getItem("bookings");
-    if (bookingsFromStorage) {
-      setBookings(JSON.parse(bookingsFromStorage));
-    } else {
-      setBookings(bookingsData);
-    }
-  }, []);
+    dispatch(fetchBookings() as any);
+  }, [dispatch]);
+
+  const handleCancelBooking = (bookingId: string) => {
+    dispatch(cancelBooking(bookingId) as any);
+  };
+  
+
+  if (loading) {
+    return <div data-test-id="loader">Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <main className="bookings-page">
@@ -27,7 +33,7 @@ const Bookings = () => {
       <ul className="bookings__list">
         {bookings &&
           bookings.map((booking) => (
-            <BookingCard key={booking.id} bookingDetails={booking} onCancel={cancelBooking} />
+            <BookingCard key={booking.id} bookingDetails={booking} onCancel={handleCancelBooking} />
           ))}
       </ul>
     </main>

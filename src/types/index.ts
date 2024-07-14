@@ -25,3 +25,10 @@ export interface Trip {
   image: string;
   createdAt: string;
 }
+
+export interface User {
+  id: number;
+  fullName: string;
+  email: string;
+  createdAt: string;
+}
