@@ -1,3 +1,5 @@
+const BASE_URL = import.meta.env.BASE_URL || "";
+
 const Footer = () => {
   return (
     <footer className="footer">
@@ -7,7 +9,7 @@ const Footer = () => {
           binary studio
         </a>
         with
-        <img className="footer__icon" src="./assets/images/heart.svg" alt="heart" />
+        <img className="footer__icon" src={`${BASE_URL}/assets/images/heart.svg`} alt="heart" />
       </span>
     </footer>
   );

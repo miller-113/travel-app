@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
-import tripsData from "../data/trips.json";
+import { useDispatch, useSelector } from "react-redux";
 import TripCard from "../components/TripCard";
 import TripFilter from "../components/TripFilter";
-
+import { fetchTrips } from "../features/trips/tripsThunks";
 import { Trip } from "../types";
 
 const Home = () => {
-  const [trips, setTrips] = useState<Trip[]>([]);
+  const dispatch = useDispatch();
+  const trips = useSelector((state) => state.trips.trips);
+  const loading = useSelector((state) => state.trips.loading);
+  const error = useSelector((state) => state.trips.error);
+
   const [filters, setFilters] = useState({
     search: "",
     duration: "",
@@ -14,10 +18,10 @@ const Home = () => {
   });
 
   useEffect(() => {
-    setTrips(tripsData);
-  }, []);
+    dispatch(fetchTrips());
+  }, [dispatch]);
 
-  const handleFilterChange = (name: string, value: string) => {
+  const handleFilterChange = (name, value) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [name]: value,
@@ -53,11 +57,17 @@ const Home = () => {
       />
       <section className="trips">
         <h2 className="visually-hidden">Trips List</h2>
-        <ul className="trip-list">
-          {filteredTrips.map((trip) => (
-            <TripCard key={trip.id} tripDetails={trip} />
-          ))}
-        </ul>
+        {loading ? (
+          <div data-test-id="loader">Loading...</div>
+        ) : error ? (
+          <div>Error: {error}</div>
+        ) : (
+          <ul className="trip-list">
+            {filteredTrips.map((trip) => (
+              <TripCard key={trip.id} tripDetails={trip} />
+            ))}
+          </ul>
+        )}
       </section>
     </>
   );
