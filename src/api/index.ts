@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.APP_BASE_URL || "https://travel-app-api.up.railway.app/api/v1",
+  baseURL: import.meta.env.APP_BASE_URL || "https://travel-app-api.up.railway.app/api/v1",
 });
 
 api.interceptors.request.use((config) => {
